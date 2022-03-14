@@ -1,5 +1,5 @@
 // React libraries
-import React from 'react';
+import React, {useState} from 'react';
 
 // React Native Libraries
 import {
@@ -9,11 +9,12 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import {ScrollView, Text, useColorScheme, View} from 'react-native';
+import {ScrollView, Text, useColorScheme, View, Button} from 'react-native';
 
 // Custom Modules
 import styles from './styles';
 import Container from '../../components/Container';
+import LifeCycle from '../LifeCycle';
 
 //region Helper Component
 const Section = ({children, title}) => {
@@ -44,11 +45,15 @@ const Section = ({children, title}) => {
 //endregion
 
 const Home = () => {
-  const isDarkMode = useColorScheme() === 'dark';
+  const [toggleClock, setToggleClock] = useState(true);
   return (
     <Container>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <Header />
+        {toggleClock && <LifeCycle />}
+        <Button
+          title={'Toggle Clock'}
+          onPress={() => setToggleClock(!toggleClock)}></Button>
         <View
           style={
             {
